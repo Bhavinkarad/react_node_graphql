@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": "8"
+    "node": "10"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
