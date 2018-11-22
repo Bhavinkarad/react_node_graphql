@@ -50,7 +50,7 @@ export const Properties = (props: Props) => {
             <Flex justifyContent="center">
               <Grid
                 container
-                spacing={12}
+                spacing={16}
                 css={{ maxWidth: 960, marginTop: '25px' }}
               >
                 <Grid item xs={12} sm={3}>

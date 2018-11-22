@@ -57,7 +57,7 @@ export const Property = (props: Props) => {
             <Flex justifyContent="center">
               <Grid
                 container
-                spacing={12}
+                spacing={16}
                 css={{ maxWidth: 960, marginTop: '25px' }}
               >
                 <Grid item xs={12} sm={3}>
@@ -67,7 +67,7 @@ export const Property = (props: Props) => {
                       color="primary"
                       variant="contained"
                     >
-                      Back to List
+                      Back to List12
                     </Button>
                   </Link>
                 </Grid>
