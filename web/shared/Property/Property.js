@@ -35,19 +35,21 @@ const PropertyFragment = createFragment<PropertyData>(
   `
 );
 
-const PropertyUpsertLead = createMutation<PropertyUpsertMutation, {}>(graphql`
-  mutation PropertyUpsertMutation($input: UpsertPropertyInput!) {
-    upsertProperty(input: $input) {
-      property {
-        id
-        livingSurface
-        landSurface
-        numberOfRooms
-        numberOfParkings
+const PropertyUpsertLead = createMutation<PropertyUpsertMutation, {}>(
+  graphql`
+    mutation PropertyUpsertMutation($input: UpsertPropertyInput!) {
+      upsertProperty(input: $input) {
+        property {
+          id
+          livingSurface
+          landSurface
+          numberOfRooms
+          numberOfParkings
+        }
       }
     }
-  }
-`);
+  `
+);
 
 type Props = {|
   ...FragmentRefs<PropertyData>,
