@@ -7,19 +7,19 @@ import Grid from '@material-ui/core/Grid';
 
 const formikEnhancer = withFormik({
   validationSchema: Yup.object().shape({
-    living_surface: Yup.number().required('Living Surface is required.'),
-    land_surface: Yup.number().required('Land Surface is required.'),
-    number_of_rooms: Yup.number().required('Number Of Rooms is required!'),
-    number_of_parkings: Yup.number().required(
-      'Number Of Parkings is required!'
-    ),
+    livingSurface: Yup.number().required('Living Surface is required.'),
+    landSurface: Yup.number().required('Land Surface is required.'),
+    numberOfRooms: Yup.number().required('Number Of Rooms is required!'),
+    numberOfParkings: Yup.number().required('Number Of Parkings is required!'),
   }),
 
   mapPropsToValues: ({ property }) => ({
     ...property,
   }),
-  handleSubmit: (payload, { setSubmitting }) => {
+  handleSubmit: (payload, { props, setSubmitting, resetForm }) => {
     setSubmitting(false);
+    props.handleSubmit(payload);
+    resetForm();
   },
   displayName: 'PropertyForm',
 });
@@ -40,13 +40,14 @@ const PropertyForm = props => {
       <Grid container spacing={24}>
         <Grid item xs={12} sm={3}>
           <TextField
-            id="living_surface"
+            id="livingSurface"
             label="Living Surface"
             className={''}
             css={{ width: '100%' }}
             variant="filled"
-            error={touched.living_surface && errors.living_surface}
-            value={values.living_surface}
+            error={touched.livingSurface && errors.livingSurface && true}
+            helperText={errors.livingSurface}
+            value={values.livingSurface || ''}
             onChange={handleChange}
             onBlur={handleBlur}
             autoComplete={'off'}
@@ -54,13 +55,14 @@ const PropertyForm = props => {
         </Grid>
         <Grid item xs={12} sm={3}>
           <TextField
-            id="land_surface"
+            id="landSurface"
             label="Land Surface"
             className={''}
             css={{ width: '100%' }}
             variant="filled"
-            error={touched.land_surface && errors.land_surface}
-            value={values.land_surface}
+            error={touched.landSurface && errors.landSurface && true}
+            helperText={errors.landSurface}
+            value={values.landSurface || ''}
             onChange={handleChange}
             onBlur={handleBlur}
             autoComplete={'off'}
@@ -69,13 +71,14 @@ const PropertyForm = props => {
         <Grid item xs={12} sm={6} />
         <Grid item xs={12} sm={3}>
           <TextField
-            id="number_of_rooms"
+            id="numberOfRooms"
             label="Number Of Rooms"
             className={''}
             css={{ width: '100%' }}
             variant="filled"
-            error={touched.number_of_rooms && errors.number_of_rooms}
-            value={values.number_of_rooms}
+            error={touched.numberOfRooms && errors.numberOfRooms && true}
+            helperText={errors.numberOfRooms}
+            value={values.numberOfRooms || ''}
             onChange={handleChange}
             onBlur={handleBlur}
             autoComplete={'off'}
@@ -83,13 +86,14 @@ const PropertyForm = props => {
         </Grid>
         <Grid item xs={12} sm={3}>
           <TextField
-            id="number_of_parkings"
+            id="numberOfParkings"
             label="Number Of Parkings"
             className={''}
             css={{ width: '100%' }}
             variant="filled"
-            error={touched.number_of_parkings && errors.number_of_parkings}
-            value={values.number_of_parkings}
+            error={touched.numberOfParkings && errors.numberOfParkings && true}
+            helperText={errors.numberOfParkings}
+            value={values.numberOfParkings || ''}
             onChange={handleChange}
             onBlur={handleBlur}
             autoComplete={'off'}
