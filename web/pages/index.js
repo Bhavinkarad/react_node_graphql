@@ -28,7 +28,7 @@ export default () => (
           Hello, Welcome to Total React Starter:
         </Typography>
 
-        <Link href={{ pathname: '/property' }}>
+        <Link href={{ pathname: '/properties' }}>
           <Button
             to="/property"
             color="primary"
