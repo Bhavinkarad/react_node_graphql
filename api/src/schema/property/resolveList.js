@@ -7,11 +7,7 @@ import {
   cursorToOffset,
 } from '../queryBuilder';
 
-export const resolveList = async function resolve(
-  root: any,
-  args: any,
-  ctx: Context,
-) {
+export const resolveList = async function resolve(root: any,args: any,ctx: Context) {
   const { query } = queryBuilder({
     ctx,
     args,

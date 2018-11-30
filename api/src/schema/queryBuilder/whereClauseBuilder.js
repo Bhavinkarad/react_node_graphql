@@ -127,11 +127,7 @@ const addQueryModifier = (query, db, modifier, table, fieldArg, value) => {
 };
 
 export const whereClauseBuilder = (params: Params) => {
-  const { modifier, field, value, tables } = parseFilterKey(
-    params.table,
-    params.key,
-    params.value,
-  );
+  const { modifier, field, value, tables } = parseFilterKey(params.table,params.key,params.value);
 
   const { ctx, query } = params;
 

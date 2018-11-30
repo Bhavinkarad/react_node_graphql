@@ -46,7 +46,7 @@ const PropertyForm = props => {
             css={{ width: '100%' }}
             variant="filled"
             error={touched.livingSurface && errors.livingSurface && true}
-            helperText={errors.livingSurface}
+            helperText={touched.livingSurface&&errors.livingSurface}
             value={values.livingSurface || ''}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -61,7 +61,7 @@ const PropertyForm = props => {
             css={{ width: '100%' }}
             variant="filled"
             error={touched.landSurface && errors.landSurface && true}
-            helperText={errors.landSurface}
+            helperText={touched.landSurface&&errors.landSurface}
             value={values.landSurface || ''}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -77,7 +77,7 @@ const PropertyForm = props => {
             css={{ width: '100%' }}
             variant="filled"
             error={touched.numberOfRooms && errors.numberOfRooms && true}
-            helperText={errors.numberOfRooms}
+            helperText={touched.numberOfRooms&&errors.numberOfRooms}
             value={values.numberOfRooms || ''}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -92,7 +92,7 @@ const PropertyForm = props => {
             css={{ width: '100%' }}
             variant="filled"
             error={touched.numberOfParkings && errors.numberOfParkings && true}
-            helperText={errors.numberOfParkings}
+            helperText={touched.numberOfParkings&&errors.numberOfParkings}
             value={values.numberOfParkings || ''}
             onChange={handleChange}
             onBlur={handleBlur}

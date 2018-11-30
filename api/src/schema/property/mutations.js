@@ -21,17 +21,9 @@ export const upsertProperty = mutationWithClientMutationId({
   },
   async mutateAndGetPayload(input, ctx: Context) {
     const property = await validate(input.property, ctx);
-
     // upsert Property
-    const upsertedProperty = await upsertPropertyTransaction(
-      property,
-      null,
-      ctx,
-    );
-
-    return ctx.properties
-      .load(upsertedProperty.id)
-      .then(x => ({ property: x }));
+    const upsertedProperty = await upsertPropertyTransaction(property,null,ctx);
+    return ctx.properties.load(upsertedProperty.id).then(x => ({ property: x }))    
   },
 });
 
@@ -51,10 +43,7 @@ export const deleteProperty = mutationWithClientMutationId({
       .delete()
       .returning('id');
     return {
-      deletedPropertyId:
-        deletedPropertyId == null
-          ? null
-          : toGlobalId('Property', deletedPropertyId),
+      deletedPropertyId:(deletedPropertyId == null)? null: toGlobalId('Property', deletedPropertyId),
     };
   },
 });

@@ -68,8 +68,7 @@ export function createMutation<
   ) => {
     const updater = config && config.updater;
     const optimisticUpdater = config && config.optimisticUpdater;
-    const optimisticResponse = config && config.optimisticResponse;
-
+    const optimisticResponse = config && config.optimisticResponse;    
     commitMutation(environment, {
       mutation,
       variables: { input },
@@ -112,7 +111,7 @@ export function createMutation<
         if (errs) {
           onError(errs);
         } else {
-          const rootField = getRootFieldName(environment, mutation);
+          const rootField = getRootFieldName(environment, mutation);          
           onComplete(data[rootField]);
         }
       },
@@ -160,7 +159,6 @@ export function createMutation<
       const environment = this._environment;
 
       this._addMutationCount(1);
-
       makeMutation(
         environment,
         input,

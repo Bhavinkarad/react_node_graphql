@@ -73,6 +73,7 @@ type PropertyConnectionEdge {
 input PropertyFilters {
   livingSurface_lte: Int
   livingSurface_gte: Int
+  id_eq: ID
 }
 
 input PropertyInput {

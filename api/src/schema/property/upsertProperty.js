@@ -18,21 +18,13 @@ async function upsertTransaction(payload: any, trx: any) {
   return [];
 }
 
-export default async function upsertProperty(
-  data: any,
-  trx: any,
-  ctx: Context,
-) {
+export default async function upsertProperty(data: any,trx: any,ctx: Context) {
   const { db } = ctx;
   let upsertedProperty;
-
   if (trx) {
     [upsertedProperty] = await upsertTransaction(data, trx);
   } else {
-    [upsertedProperty] = await db.transaction(async t =>
-      upsertTransaction(data, t),
-    );
+    [upsertedProperty] = await db.transaction(async t => upsertTransaction(data, t));
   }
-
   return upsertedProperty;
 }

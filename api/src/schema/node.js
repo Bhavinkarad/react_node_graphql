@@ -8,11 +8,14 @@ import { type Context } from '../Context';
 import { PropertyType } from './PropertyType';
 
 export const { nodeInterface, nodeField, nodesField } = nodeDefinitions(
-  (globalId, context: Context) => {
+ async (globalId, context: Context) => {
     const { type, id } = fromGlobalId(globalId);
     switch (type) {
       case 'Property':
-        return context.properties.load(id).then(assignType('Property'));
+       const obj = await context.properties.load(id);
+      return assignType('Property')(obj);
+      // return context.properties.load(id).then(assignType('Property'));
+       
 
       default:
         throw new Error(`Type ${type} is not implemented in node interface`);
@@ -28,3 +31,4 @@ export const { nodeInterface, nodeField, nodesField } = nodeDefinitions(
     }
   },
 );
+

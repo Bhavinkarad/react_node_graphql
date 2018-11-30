@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Grid from '@material-ui/core/Grid';
 import { Link } from '../../controls/link';
+import {ConnectionHandler} from 'relay-runtime';
 import { type FragmentRefs, createFragment,createMutation } from '../../controls/relay';
 import type { Properties_root } from './__generated__/Properties_root.graphql';
 import type { PropertyDeleteMutation } from './__generated__/PropertyDeleteMutation.graphql';
@@ -26,7 +27,8 @@ type PropertiesData = {|
 const PropertiesFragment = createFragment<PropertiesData>(
   graphql`
     fragment Properties_root on Query {
-      properties {
+      # max GraphQLInt
+      properties(first: 2147483647) @connection(key: "Properties_properties"){
         edges {
           node {
             id
@@ -42,19 +44,37 @@ const PropertiesFragment = createFragment<PropertiesData>(
   `
 );
 
-const PropertiesDeleteLead = createMutation<PropertiesDeleteMutation, {}>(
-  graphql`
-  mutation PropertiesDeleteMutation($input: DeletePropertyInput!) {
-    deleteProperty(input: $input) {
-      deletedPropertyId  
-    }
+
+const mutation = graphql`
+mutation PropertiesDeleteMutation($input: DeletePropertyInput!) {
+  deleteProperty(input: $input) {
+    deletedPropertyId  
   }
-`);
+}`
+
+function sharedUpdater(store, user, deletedID) {
+  const propertyProxy = store.get('client:root');
+  const conn = ConnectionHandler.getConnection(propertyProxy,'Properties_properties');      
+  ConnectionHandler.deleteNode(conn,deletedID);
+}
+
+const PropertiesDeleteLead = createMutation<PropertiesDeleteMutation, {}>(
+  mutation,
+  {
+    updater: ({ store, input, payload, props }) => {  
+      sharedUpdater(store,props,input.propertyId)      
+    },
+    optimisticUpdater: ({ store, input, props }) => {
+      sharedUpdater(store,props,input.propertyId)
+    },
+  }
+  );
 
 type Props = {|
   ...FragmentRefs<PropertyData>,
   step?: string,
 |};
+
 export const Properties = (props: Props) => {
   return (
     <>
