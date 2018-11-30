@@ -5,6 +5,7 @@ import {
   GraphQLNonNull,
   GraphQLInt,
   GraphQLInputObjectType,
+  GraphQLID,
 } from 'graphql';
 import { forwardConnectionArgs, connectionDefinitions } from 'graphql-relay';
 import { resolveList } from './resolveList';
@@ -30,6 +31,7 @@ export const properties = {
         fields: {
           livingSurface_lte: { type: GraphQLInt },
           livingSurface_gte: { type: GraphQLInt },
+          id_eq: { type: GraphQLID },
         },
       }),
     },
